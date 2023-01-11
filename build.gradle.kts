@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1")
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -32,6 +33,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.batch:spring-batch-test")
     testImplementation("org.springframework.security:spring-security-test")
+
+
+
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 }
 
 tasks.withType<Test> {
