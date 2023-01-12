@@ -2,13 +2,20 @@ package com.ddrd.management.controller;
 
 
 import com.ddrd.management.domain.UserDto;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 public class CommonController {
+
+    @GetMapping("/api/v1/health")
+    @ResponseStatus(HttpStatus.OK)
+    public String healthCheck() {
+        return "ok3";
+    }
+
     @GetMapping("/main")
     public String home(){
         return "main";

@@ -18,17 +18,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
-//    @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/main","/login").permitAll()
+                        .requestMatchers("/", "/main","/login", "/api/v1/health").permitAll()
                         .anyRequest().authenticated()
                 )
-                /*.formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )*/
                 .logout((logout) -> logout.permitAll());
 
         return http.build();
