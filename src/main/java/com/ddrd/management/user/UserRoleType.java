@@ -2,8 +2,10 @@ package com.ddrd.management.user;
 
 public enum UserRoleType {
     USER("USER"),
+    MANAGER("MANAGER"),
+    MASTER("MASTER"),
     ADMIN("ADMIN"),
-    MANAGER("MANAGER");
+    DEVELOPER("DEVELOPER");
 
     private final String role;
     UserRoleType(String role) {

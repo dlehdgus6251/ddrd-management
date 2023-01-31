@@ -27,10 +27,12 @@ public class SecurityConfig {
         http
                 .csrf().disable()// 세션을 사용하지 않고 JWT 토큰을 활용하여 진행, csrf토큰검사를 비활성화
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/","/main","/signUp", "/api/v1/health").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
-                        .requestMatchers("/user","/user/**").hasRole("USER") // "USER"만 접근 가능
-                        .requestMatchers("/manager", "/manager/**").hasRole("MANAGER") // "MANAGER"만 접근 가능
-                        .requestMatchers("/admin", "admin/**").hasRole("ADMIN") // "ADMIN"만 접근 가능
+                        .requestMatchers( "/","/main","/signUp", "/api/v1/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
+                        .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName(), UserRoleType.MANAGER.roleName(), UserRoleType.MASTER.roleName(), UserRoleType.ADMIN.roleName(), UserRoleType.DEVELOPER.roleName()) // 블랙회원 제외 권한 부여
+                        .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName(), UserRoleType.MASTER.roleName(), UserRoleType.ADMIN.roleName(), UserRoleType.DEVELOPER.roleName()) // 운영진 이상 권한 부여
+                        .requestMatchers("/admin", "admin/**").hasAnyRole(UserRoleType.ADMIN.roleName(), UserRoleType.DEVELOPER.roleName()) // 어플 관리자 이상 권한부여
+                        .requestMatchers("/developer", "developer/**").hasAnyRole(UserRoleType.DEVELOPER.roleName()) // 개발자 권한부여
                         .anyRequest().authenticated() // 위 페이지 외 인증이 되어야 접근가능(ROLE에 상관없이)
                 )
                 .formLogin()
