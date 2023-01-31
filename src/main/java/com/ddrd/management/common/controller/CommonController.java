@@ -28,6 +28,7 @@ public class CommonController extends BaseController{
     public String login(){
         return "login";
     }
+
     @GetMapping("/signUp")
     public String signUp(){
         return "signUp";
