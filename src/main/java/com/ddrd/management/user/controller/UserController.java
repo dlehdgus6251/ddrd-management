@@ -1,6 +1,6 @@
-package com.ddrd.management.controller;
+package com.ddrd.management.user.controller;
 
-import com.ddrd.management.domain.UserDto;
+import com.ddrd.management.user.domain.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,10 @@ public class UserController {
     public void getUsers(){
 
     }
-
+    @GetMapping("/users/new")
+    public String getUsersNew(){
+        return "signUp";
+    }
     @GetMapping("/user/{id}")
     public void getUser(@PathVariable("id") long id){
 

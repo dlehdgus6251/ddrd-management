@@ -1,4 +1,4 @@
-package com.ddrd.management.service;
+package com.ddrd.management.user.service;
 
 import org.springframework.stereotype.Service;
 
