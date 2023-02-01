@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>연습실 명</th>
+            <th>연습실 위도</th>
+            <th>연습실 경도</th>
+            <th>연습실 도로명 주소</th>
+            <th>연습실 주소</th>
+            <th>연습실 설명</th>
+            <th>연습실 중요 사항</th>
+            <th>등록일</th>
+        </tr>
+
+    </thead>
+    <tbody>
+    <th:block th:each="practice: ${practiceList}">
+        <tr>
+            <td th:text="${practice.practiceName}"></td>
+            <td th:text="${practice.practiceLatitude}"></td>
+            <td th:text="${practice.practiceLongitude}"></td>
+            <td th:text="${practice.practiceNewAddr}"></td>
+            <td th:text="${practice.practiceOldAddr}"></td>
+            <td th:text="${practice.practiceNoti}"></td>
+            <th:block sec:authorize="hasRole(UserRoleType.USER.roleName())">
+                <td th:text="${practice.practiceSecretNoti}"></td>
+            </th:block>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+</body>
+</html>

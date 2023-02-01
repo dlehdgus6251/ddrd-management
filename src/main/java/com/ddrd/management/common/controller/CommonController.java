@@ -36,7 +36,16 @@ public class CommonController extends BaseController{
     public String signUp(){
         return "signUp";
     }
+    @GetMapping("/signUp/{userId}")
+    public String signUp(@PathVariable(value = "userId") Long id){
+        return "signUp";
+    }
+    @PutMapping
 
+    @DeleteMapping
+
+    @PatchMapping
+    //등록
     @PostMapping("/signUp")
     public void signUp(UserDto userDto){
         log.info("userDto :: {}",userDto.toString());
