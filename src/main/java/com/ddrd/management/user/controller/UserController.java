@@ -1,11 +1,21 @@
 package com.ddrd.management.user.controller;
 
+import com.ddrd.management.common.domain.LoginResponse;
+import com.ddrd.management.common.service.LoginService;
+import com.ddrd.management.user.UserRoleType;
 import com.ddrd.management.user.domain.UserDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
+@Slf4j
 public class UserController {
+    private final LoginService loginService;
     @GetMapping("/users")
     public void getUsers(){
 
@@ -14,9 +24,10 @@ public class UserController {
     public String getUsersNew(){
         return "signUp";
     }
-    @GetMapping("/user/{id}")
-    public void getUser(@PathVariable("id") long id){
-
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<LoginResponse> getUser(@PathVariable("userId") String userId) throws Exception {
+        log.info("권한 확인 :: {} ", UserRoleType.USER.roleName());
+        return new ResponseEntity<>( loginService.getuserEntity(userId), HttpStatus.OK);
     }
 
     @PostMapping("/user")
