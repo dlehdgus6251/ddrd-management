@@ -10,15 +10,11 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
+<form th:action="@{/loginProc}" method="post">
+    <div><label> 아이디 : <input type="text" name="userId"/> </label></div>
+    <div><label> 비밀번호 : <input type="password" name="userPassword"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
-    <select id="select" name="select">
-        <th:block th:each="obj,${objList}">
-            <option th:value="${obj.value}" th:text="${obj.name}"></option>
-        </th:block>
-    </select>
+
 </form>
 </body>
 </html>

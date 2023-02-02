@@ -28,7 +28,7 @@
             <td th:text="${practice.practiceNewAddr}"></td>
             <td th:text="${practice.practiceOldAddr}"></td>
             <td th:text="${practice.practiceNoti}"></td>
-            <th:block sec:authorize="hasRole(UserRoleType.USER.roleName())">
+            <th:block sec:authorize="hasRole(T(com.ddrd.management.user.UserRoleType.MANAGER))">
                 <td th:text="${practice.practiceSecretNoti}"></td>
             </th:block>
         </tr>

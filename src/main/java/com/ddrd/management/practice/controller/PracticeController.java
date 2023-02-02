@@ -1,6 +1,7 @@
 package com.ddrd.management.practice.controller;
 
 import com.ddrd.management.practice.domain.PracticeDto;
+import com.ddrd.management.user.UserRoleType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,10 @@ public class PracticeController {
     @GetMapping(value = "/practices")
     public String practices(Model model){
         List<PracticeDto> practiceDtoList = new ArrayList<>();
+        List<String> useRoleList = new ArrayList<>();
+        useRoleList.add(UserRoleType.MANAGER.roleName());
         model.addAttribute("practiceList", practiceDtoList);
+        model.addAttribute("useRoleList", useRoleList);
         return "practice/main";
     }
 }

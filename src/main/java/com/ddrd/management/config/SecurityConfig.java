@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/main", true)
                 .permitAll()
                 .and()
-                .logout() // 8
+                .logout() //
                 .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
                 .invalidateHttpSession(true); // 세션 날리기
 

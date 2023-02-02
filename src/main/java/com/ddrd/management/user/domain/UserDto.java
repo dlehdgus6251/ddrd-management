@@ -14,6 +14,7 @@ public class UserDto {
     private String userGender;
     private LocalDateTime joinDate;
     private String userId;
+    private String userPassword;
     private String userLevel;
     private String userRank;
     private String userAddress;
@@ -31,6 +32,7 @@ public class UserDto {
                 ", userGender='" + userGender + '\'' +
                 ", joinDate=" + joinDate +
                 ", userId='" + userId + '\'' +
+                ", userPassword='" + userPassword + '\'' +
                 ", userLevel='" + userLevel + '\'' +
                 ", userRank='" + userRank + '\'' +
                 ", userAddress='" + userAddress + '\'' +
