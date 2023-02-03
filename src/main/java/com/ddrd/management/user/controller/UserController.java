@@ -26,7 +26,7 @@ public class UserController {
     }
     @GetMapping("/user/{userId}")
     public ResponseEntity<LoginResponse> getUser(@PathVariable("userId") String userId) throws Exception {
-        log.info("권한 확인 :: {} ", UserRoleType.USER.roleName());
+
         return new ResponseEntity<>( loginService.getuserEntity(userId), HttpStatus.OK);
     }
 

@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
@@ -41,10 +42,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
+@Slf4j
 public class SecurityConfig {
     private final JwtProvider jwtProvider;
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 // ID, Password 문자열을 Base64로 인코딩하여 전달하는 구조
@@ -73,13 +75,13 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/","/main","/signUp", "/api/v1/**","/user","/user/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        .requestMatchers( "/","/main","/login","/signUp", "/api/v1/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
                         //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
 //                        .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName()) // 유저 이상 권한 부여
                         .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName()) // 운영진 이상 권한 부여
                         .requestMatchers("/admin", "admin/**").hasAnyRole(UserRoleType.ADMIN.roleName()) // 어플 관리자 이상 권한부여
                         .requestMatchers("/developer", "developer/**").hasAnyRole(UserRoleType.DEVELOPER.roleName()) // 개발자 권한부여
-                        .anyRequest().authenticated() // 위 페이지 외 인증이 되어야 접근가능(ROLE에 상관없이)
+                        .anyRequest().denyAll() // 위 페이지 외 인증이 되어야 접근가능(ROLE에 상관없이)
                 )
                 // JWT 인증 필터 적용
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
@@ -87,7 +89,7 @@ public class SecurityConfig {
                 .exceptionHandling()
                 .accessDeniedHandler(new AccessDeniedHandler() {
                     @Override
-                    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws ServletException, java.io.IOException {
+                    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws ServletException, IOException {
                         // 권한 문제가 발생했을 때 이 부분을 호출한다.
                         response.setStatus(403);
                         response.setCharacterEncoding("utf-8");
@@ -98,25 +100,14 @@ public class SecurityConfig {
                 .authenticationEntryPoint(new AuthenticationEntryPoint() {
                     @Override
                     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws ServletException, IOException {
+                        log.info("aaaaaaaa :: {}", request);
                         // 인증문제가 발생했을 때 이 부분을 호출한다.
                         response.setStatus(401);
                         response.setCharacterEncoding("utf-8");
                         response.setContentType("text/html; charset=UTF-8");
                         response.getWriter().write("인증되지 않은 사용자입니다.");
                     }
-                })
-                .and()
-                .formLogin()
-                .loginPage("/login") // 접근이 차단된 페이지 클릭시 이동할 url
-                .loginProcessingUrl("/loginProc") // 로그인시 맵핑되는 url
-                .usernameParameter("userId")    // view form 태그 내에 로그인 할 id 에 맵핑되는 name ( form 의 name )
-                .passwordParameter("password")  // view form 태그 내에 로그인 할 password 에 맵핑되는 name ( form 의 name )
-                .defaultSuccessUrl("/main", true)
-                .permitAll()
-                .and()
-                .logout() //
-                .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
-                .invalidateHttpSession(true); // 세션 날리기
+                });
 
         return http.build();
     }
@@ -149,12 +140,5 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable();
-        return http.build();
     }
 }

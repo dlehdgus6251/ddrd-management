@@ -8,23 +8,31 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @Slf4j
 public class CommonController extends BaseController{
     private final UserRepository userRepository;
     private final LoginService loginService;
     @GetMapping("/")
-    public String home() { return "home"; }
+    public String home() {
+        log.info("진입");
+        return "home"; }
     @GetMapping("/main")
     public String main(){
         return "main";
     }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
-        log.info("권한 확인 :: {}", UserRoleType.USER.roleName());
+
         return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
     }
     @GetMapping("/signUp")
@@ -35,11 +43,6 @@ public class CommonController extends BaseController{
     public String signUp(@PathVariable(value = "userId") Long id){
         return "signUp";
     }
-    @PutMapping
-
-    @DeleteMapping
-
-    @PatchMapping
     //등록
     @PostMapping("/signUp")
     public ResponseEntity<Boolean> signUp(@RequestBody LoginRequest request) throws Exception {
