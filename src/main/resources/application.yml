@@ -16,3 +16,6 @@ spring:
 jwt:
   secret:
     key: y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*G-KaPdSgVkYp2s
+
+mybatis:
+  mapper-locations: /mybatis/**/*.xml

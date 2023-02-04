@@ -14,22 +14,24 @@
             <th>연습실 도로명 주소</th>
             <th>연습실 주소</th>
             <th>연습실 설명</th>
-            <th>연습실 중요 사항</th>
+            <th:block sec:authorize="hasRole(T(com.ddrd.management.user.UserRoleType.MANAGER))">
+                <th>연습실 중요 사항</th>
+            </th:block>
             <th>등록일</th>
         </tr>
 
     </thead>
     <tbody>
-    <th:block th:each="practice: ${practiceList}">
+    <th:block th:each="material: ${materialList}">
         <tr>
-            <td th:text="${practice.practiceName}"></td>
-            <td th:text="${practice.practiceLatitude}"></td>
-            <td th:text="${practice.practiceLongitude}"></td>
-            <td th:text="${practice.practiceNewAddr}"></td>
-            <td th:text="${practice.practiceOldAddr}"></td>
-            <td th:text="${practice.practiceNoti}"></td>
+            <td th:text="${material.materialName}"></td>
+            <td th:text="${material.materialLatitude}"></td>
+            <td th:text="${material.materialLongitude}"></td>
+            <td th:text="${material.materialNewAddr}"></td>
+            <td th:text="${material.materialOldAddr}"></td>
+            <td th:text="${material.materialNoti}"></td>
             <th:block sec:authorize="hasRole(T(com.ddrd.management.user.UserRoleType.MANAGER))">
-                <td th:text="${practice.practiceSecretNoti}"></td>
+                <td th:text="${material.materialSecretNoti}"></td>
             </th:block>
         </tr>
     </th:block>

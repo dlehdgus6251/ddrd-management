@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <title>z</title>
 </head>
 <body>
-<a href="/login">login</a>
-<a href="/main">main</a>
-<a href="/signUp">signUp</a>
-<a href="/practices">practice</a>
+<a th:href="@{/login}">login</a>
+<a th:href="@{/main}">main</a>
+<a th:href="@{/signUp}">signUp</a>
+<a th:href="@{/material/materials}">material</a>
 </body>
 </html>

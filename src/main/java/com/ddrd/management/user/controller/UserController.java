@@ -2,10 +2,9 @@ package com.ddrd.management.user.controller;
 
 import com.ddrd.management.common.domain.LoginResponse;
 import com.ddrd.management.common.service.LoginService;
-import com.ddrd.management.user.UserRoleType;
 import com.ddrd.management.user.domain.UserDto;
+import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class UserController {
     }
     @GetMapping("/user/{userId}")
     public ResponseEntity<LoginResponse> getUser(@PathVariable("userId") String userId) throws Exception {
-        log.info("권한 확인 :: {} ", UserRoleType.USER.roleName());
+
         return new ResponseEntity<>( loginService.getuserEntity(userId), HttpStatus.OK);
     }
 
