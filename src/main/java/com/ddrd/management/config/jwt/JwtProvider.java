@@ -25,7 +25,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-@Slf4j
 public class JwtProvider {
 
     @Value("${jwt.secret.key}")
@@ -59,12 +58,12 @@ public class JwtProvider {
     // 권한정보 획득
     // Spring Security 인증과정에서 권한확인을 위한 기능
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getAccount(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserId(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     // 토큰에 담겨있는 유저 account 획득
-    public String getAccount(String token) {
+    public String getUserId(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
     }
 

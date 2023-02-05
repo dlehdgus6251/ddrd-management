@@ -3,9 +3,9 @@
 #######################
 spring:
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: admin
-    url: jdbc:log4jdbc:mysql://dev-ddrd-management.crqzg9d1kmc5.ap-northeast-2.rds.amazonaws.com:3306/dev_ddrd?characterEncoding=utf8
+    url: jdbc:mysql://dev-ddrd-management.crqzg9d1kmc5.ap-northeast-2.rds.amazonaws.com:3306/dev_ddrd?characterEncoding=utf8
     password: ddrd-management
 
 #######################

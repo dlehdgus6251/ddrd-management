@@ -3,16 +3,13 @@ package com.ddrd.management.user.controller;
 import com.ddrd.management.common.domain.LoginResponse;
 import com.ddrd.management.common.service.LoginService;
 import com.ddrd.management.user.domain.UserDto;
-import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
     private final LoginService loginService;
     @GetMapping("/users")

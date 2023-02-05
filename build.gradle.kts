@@ -34,7 +34,8 @@ dependencies {
     implementation("org.jetbrains:annotations:20.1.0")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
-    annotationProcessor("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
+
     runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")

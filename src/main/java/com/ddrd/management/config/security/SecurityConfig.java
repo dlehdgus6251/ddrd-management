@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -46,10 +47,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // ID, Password 문자열을 Base64로 인코딩하여 전달하는 구조
-                .httpBasic().disable()
                 // 쿠키 기반이 아닌 JWT 기반이므로 사용하지 않음
                 .csrf().disable()
+                // ID, Password 문자열을 Base64로 인코딩하여 전달하는 구조
+                .httpBasic().disable()
                 // CORS 설정
                 .cors(c -> {
                             CorsConfigurationSource source = request -> {
@@ -70,18 +71,26 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/", "/main", "login", "/signUp", "/api/v1/**","/user","/user/**", "/material", "/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        .requestMatchers( "/", "/main", "/login", "/signUp", "/api/v1/**","/user","/user/**", "/material", "/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
                         //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
                         .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName()) // 유저 이상 권한 부여
                         .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName()) // 운영진 이상 권한 부여
                         .requestMatchers("/admin", "admin/**").hasAnyRole(UserRoleType.ADMIN.roleName()) // 어플 관리자 이상 권한부여
                         .requestMatchers("/developer", "developer/**").hasAnyRole(UserRoleType.DEVELOPER.roleName()) // 개발자 권한부여
-                        .anyRequest().denyAll() // 위 페이지 외 인증이 되어야 접근가능
+                        .anyRequest().authenticated() // 위 페이지 외 인증이 되어야 접근가능
                 )
+
+                //로그인 시도시
+                .formLogin().disable() // 로그인 페이지 사용 안함
+//                .loginPage("/user/loginView") // 로그인 성공 URL을 설정함
+//                .successForwardUrl("/index") // 로그인 실패 URL을 설정함
+//                .failureForwardUrl("/index").permitAll()
                 // JWT 인증 필터 적용
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+
                 // 에러 핸들링
                 .exceptionHandling()
+
                 .accessDeniedHandler(new AccessDeniedHandler() {
                     @Override
                     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws ServletException, java.io.IOException {

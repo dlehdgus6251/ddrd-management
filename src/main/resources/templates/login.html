@@ -2,6 +2,22 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Spring Security Example </title>
+    <script>
+        function login(){
+            const url = "/login";
+
+            fetch("/singup", {
+                method: 'POST',
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body:{
+                    "userId":document.getElementsByName("userId"),
+                    "password":document.getElementsByName("password")
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <!--<div th:if="${param.error}">
@@ -10,11 +26,9 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>-->
-<form th:action="@{/login}" method="post">
     <div><label> 아이디 : <input type="text" name="userId"/> </label></div>
     <div><label> 비밀번호 : <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+    <div><input type="button" onclick="login()" value="Sign In"/></div>
 
-</form>
 </body>
 </html>
