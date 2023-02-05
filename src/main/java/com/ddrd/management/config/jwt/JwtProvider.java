@@ -1,8 +1,7 @@
 package com.ddrd.management.config.jwt;
 
 import com.ddrd.management.common.domain.AuthorityEntity;
-import com.ddrd.management.user.domain.UserEntity;
-import com.ddrd.management.user.service.JpaUserDetailsService;
+import com.ddrd.management.common.service.JpaUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +10,6 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

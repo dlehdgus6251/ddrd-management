@@ -18,23 +18,19 @@ public class CommonController extends BaseController{
     private final UserRepository userRepository;
     private final LoginService loginService;
     @GetMapping("/")
-    public String home() {
-        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        return "home"; }
+    public String home() { return "home"; }
 
     @GetMapping("/main")
     public String main(){
         return "main";
     }
-    @GetMapping("/login")
-    public String login(){
-        log.info("bnbbbbbbbbbbbbbbbbbb");
-        return"login"; }
-    @PostMapping("/signUp")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
-        log.info("login 시도 :: {}, {}", request.getUserId(),request.getPassword());
-        return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
-    }
+    @GetMapping("/login/aa")
+    public String login(){ return"login"; }
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
+//        log.info("login 시도 :: {}, {}", request.getUserName(),request.getPassword());
+//        return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
+//    }
     @GetMapping("/signUp")
     public String signUp(){
         return "signUp";

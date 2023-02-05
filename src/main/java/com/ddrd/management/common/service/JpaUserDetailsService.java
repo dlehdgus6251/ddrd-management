@@ -1,4 +1,4 @@
-package com.ddrd.management.user.service;
+package com.ddrd.management.common.service;
 
 import com.ddrd.management.config.security.SecurityUserDetail;
 import com.ddrd.management.user.domain.UserEntity;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
+// login 요청이 들어오면 동작
 @Service
 @RequiredArgsConstructor
 public class JpaUserDetailsService implements UserDetailsService {
