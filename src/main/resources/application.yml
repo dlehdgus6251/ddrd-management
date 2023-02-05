@@ -19,3 +19,7 @@ jwt:
 
 mybatis:
   mapper-locations: /mybatis/**/*.xml
+  configuration:
+    config-location: mybatis.xml
+    map-underscore-to-camel-case: true
+  type-aliases-package: com/ddrd/management/**/domain

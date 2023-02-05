@@ -22,17 +22,18 @@
 
     </thead>
     <tbody>
-    <th:block th:each="material: ${materialList}">
+    <th:block th:each="item: ${materialList}">
         <tr>
-            <td th:text="${material.materialName}"></td>
-            <td th:text="${material.materialLatitude}"></td>
-            <td th:text="${material.materialLongitude}"></td>
-            <td th:text="${material.materialNewAddr}"></td>
-            <td th:text="${material.materialOldAddr}"></td>
-            <td th:text="${material.materialNoti}"></td>
+            <td th:text="${item.materialName}"></td>
+            <td th:text="${item.materialLatitude}"></td>
+            <td th:text="${item.materialLongitude}"></td>
+            <td th:text="${item.materialNewAddr}"></td>
+            <td th:text="${item.materialOldAddr}"></td>
+            <td th:text="${item.materialNoti}"></td>
             <th:block sec:authorize="hasRole(T(com.ddrd.management.user.UserRoleType.MANAGER))">
-                <td th:text="${material.materialSecretNoti}"></td>
+                <td th:text="${item.materialSecretNoti}"></td>
             </th:block>
+            <td th:text="${item.regNo}"></td>
         </tr>
     </th:block>
     </tbody>

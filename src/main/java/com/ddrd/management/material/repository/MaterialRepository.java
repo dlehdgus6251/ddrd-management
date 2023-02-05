@@ -1,6 +1,7 @@
 package com.ddrd.management.material.repository;
 
 import com.ddrd.management.material.domain.MaterialDto;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

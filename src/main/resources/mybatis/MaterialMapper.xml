@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ddrd.management.material.repository.MaterialRepository">
+    <select id="getMaterials" resultType="MaterialDto">
+        SELECT
+            material_no,
+            material_name,
+            material_latitude,
+            material_longitude,
+            material_new_addr,
+            material_old_addr,
+            material_noti,
+            material_secret_noti,
+            reg_no,
+            reg_date,
+            upd_no,
+            upd_date
+        FROM ddrd_material
+    </select>
+</mapper>
