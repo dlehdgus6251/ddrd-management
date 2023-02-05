@@ -66,19 +66,17 @@ public class SecurityConfig {
                             c.configurationSource(source);
                         }
                 )
-
                 // Spring Security 세션 정책 : 세션을 생성 및 사용하지 않음
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/","/main","/signUp", "/api/v1/**","/user","/user/**", "/material", "/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        .requestMatchers( "/", "/main", "login", "/signUp", "/api/v1/**","/user","/user/**", "/material", "/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
                         //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
                         .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName()) // 유저 이상 권한 부여
                         .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName()) // 운영진 이상 권한 부여
                         .requestMatchers("/admin", "admin/**").hasAnyRole(UserRoleType.ADMIN.roleName()) // 어플 관리자 이상 권한부여
                         .requestMatchers("/developer", "developer/**").hasAnyRole(UserRoleType.DEVELOPER.roleName()) // 개발자 권한부여
-                        .anyRequest().authenticated() // 위 페이지 외 인증이 되어야 접근가능(ROLE에 상관없이)
+                        .anyRequest().denyAll() // 위 페이지 외 인증이 되어야 접근가능
                 )
                 // JWT 인증 필터 적용
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
@@ -103,44 +101,33 @@ public class SecurityConfig {
                         response.setContentType("text/html; charset=UTF-8");
                         response.getWriter().write("인증되지 않은 사용자입니다.");
                     }
-                })
-                .and()
-                .formLogin()
-                .loginPage("/login") // 접근이 차단된 페이지 클릭시 이동할 url
-                .loginProcessingUrl("/loginProc") // 로그인시 맵핑되는 url
-                .usernameParameter("userId")    // view form 태그 내에 로그인 할 id 에 맵핑되는 name ( form 의 name )
-                .passwordParameter("password")  // view form 태그 내에 로그인 할 password 에 맵핑되는 name ( form 의 name )
-                .defaultSuccessUrl("/main", true)
-                .permitAll()
-                .and()
-                .logout() //
-                .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
-                .invalidateHttpSession(true); // 세션 날리기
+                });
+
 
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-
-        String password = passwordEncoder.encode("1234");
-        manager.createUser(User.withUsername("dlehdgus")
-                .password(password)
-                .roles(UserRoleType.USER.roleName())
-                .build());
-
-        manager.createUser(User.withUsername("qkrtjdwls")
-                .password(password)
-                .roles(UserRoleType.ADMIN.roleName())
-                .build());
-
-        manager.createUser(User.withUsername("qkrwldnjs")
-                .password(password)
-                .roles(UserRoleType.MANAGER.roleName())
-                .build());
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//
+//        String password = passwordEncoder.encode("1234");
+//        manager.createUser(User.withUsername("dlehdgus")
+//                .password(password)
+//                .roles(UserRoleType.USER.roleName())
+//                .build());
+//
+//        manager.createUser(User.withUsername("qkrtjdwls")
+//                .password(password)
+//                .roles(UserRoleType.ADMIN.roleName())
+//                .build());
+//
+//        manager.createUser(User.withUsername("qkrwldnjs")
+//                .password(password)
+//                .roles(UserRoleType.MANAGER.roleName())
+//                .build());
+//        return manager;
+//    }
     @Bean
     WebSecurityCustomizer ignoringCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/resources/**");
