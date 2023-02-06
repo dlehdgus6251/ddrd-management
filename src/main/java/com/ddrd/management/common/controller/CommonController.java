@@ -24,13 +24,13 @@ public class CommonController extends BaseController{
     public String main(){
         return "main";
     }
-    @GetMapping("/login/aa")
+    @GetMapping("/login")
     public String login(){ return"login"; }
-//    @PostMapping("/login")
-//    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
-//        log.info("login 시도 :: {}, {}", request.getUserName(),request.getPassword());
-//        return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
+        log.info("login 시도 :: {}, {}", request.getUserName(),request.getPassword());
+        return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
+    }
     @GetMapping("/signUp")
     public String signUp(){
         return "signUp";

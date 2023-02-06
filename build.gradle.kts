@@ -36,6 +36,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
     implementation("ch.qos.logback:logback-classic:1.4.5")
 
+
     runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")

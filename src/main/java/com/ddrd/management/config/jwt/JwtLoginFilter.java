@@ -2,7 +2,6 @@ package com.ddrd.management.config.jwt;
 
 import com.ddrd.management.common.domain.LoginRequest;
 import com.ddrd.management.common.domain.LoginResponse;
-import com.ddrd.management.common.service.JpaUserDetailsService;
 import com.ddrd.management.common.service.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -13,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -22,12 +22,13 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
-    private final AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     private final LoginService loginService;
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
-        log.info("로그인 시도@!!!@!@!@");
+        log.info("로그인 시도@!!!@!@!@제발 타라 ㅠㅠ퓨ㅠㅠㅠㅠㅠ");
         ObjectMapper om = new ObjectMapper();
         try {
             LoginRequest loginRequest = om.readValue(request.getInputStream(), LoginRequest.class);

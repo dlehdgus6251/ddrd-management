@@ -6,15 +6,12 @@
         function login(){
             const url = "/login";
 
-            fetch("/login", {
+            fetch(url, {
                 method: 'POST',
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body:{
+                body:JSON.stringify({
                     "userId":document.getElementsByName("userId"),
                     "password":document.getElementsByName("password")
-                }
+                })
             })
         }
     </script>
