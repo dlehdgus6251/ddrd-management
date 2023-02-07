@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @ToString
 public class UserDto {
     private long userNo;
@@ -40,5 +39,6 @@ public class UserDto {
     private String delYn;
     private LocalDateTime updateDate;
     private long updateNo;
+
 
 }

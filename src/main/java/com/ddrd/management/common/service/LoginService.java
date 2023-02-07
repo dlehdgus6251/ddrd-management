@@ -34,6 +34,7 @@ public class LoginService {
             throw new BadCredentialsException("잘못된 계정정보입니다.");
         }
         log.info("login 시도 :: {}", userEntity.toString());
+
         return LoginResponse.builder()
                 .userNo(userEntity.getUserNo())
                 .userId(userEntity.getUserId())

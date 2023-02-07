@@ -1,7 +1,6 @@
 package com.ddrd.management.common.controller;
 import com.ddrd.management.common.domain.LoginRequest;
 import com.ddrd.management.common.domain.LoginResponse;
-import com.ddrd.management.user.UserRoleType;
 import com.ddrd.management.user.repository.UserRepository;
 import com.ddrd.management.common.service.LoginService;
 import lombok.RequiredArgsConstructor;
@@ -28,21 +27,19 @@ public class CommonController extends BaseController{
     public String login(){ return"login"; }
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
-        log.info("login 시도 :: {}, {}", request.getUserName(),request.getPassword());
+        log.info("로그인 시도 정보 :: {}", request.toString());
+
         return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
     }
     @GetMapping("/signUp")
     public String signUp(){
         return "signUp";
     }
-    @GetMapping("/signUp/{userId}")
-    public String signUp(@PathVariable(value = "userId") Long id){
-        return "signUp";
+
+//    회원 가입
+    @PostMapping("/signUp")
+    public ResponseEntity<Boolean> signUp(@RequestBody LoginRequest request) throws Exception {
+        return new ResponseEntity<>(loginService.register(request), HttpStatus.OK);
     }
-    //등록
-//    @PostMapping("/signUp")
-//    public ResponseEntity<Boolean> signUp(@RequestBody LoginRequest request) throws Exception {
-//        return new ResponseEntity<>(loginService.register(request), HttpStatus.OK);
-//    }
 
 }

@@ -1,5 +1,6 @@
 package com.ddrd.management.config.security;
 
+import com.ddrd.management.common.service.LoginService;
 import com.ddrd.management.config.jwt.JwtAuthenticationFilter;
 import com.ddrd.management.config.jwt.JwtLoginFilter;
 import com.ddrd.management.config.jwt.JwtProvider;
@@ -33,6 +34,7 @@ import java.io.IOException;
 @EnableWebSecurity  //스프링 시큐리티 필터가 스프링 필터체인에 등록이 됨
 public class SecurityConfig {
     private final JwtProvider jwtProvider;
+    private AuthenticationManager authenticationManager;
     private final CorsFilter corsFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,11 +49,12 @@ public class SecurityConfig {
                 .and()
                 // CORS 설정
                 .addFilter(corsFilter)
+//                .addFilter(new JwtLoginFilter((LoginService) authenticationManager))
                 // JWT 인증 필터 적용
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
-
+//                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), JwtLoginFilter.class)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/", "/main", "/login", "/login/**", "/api/v1/**", "/material", "/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        .requestMatchers( "/", "/main", "/login", "/login/**", "/user","/user/**","/api/v1/**","/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
                         //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
                         .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName()) // 유저 이상 권한 부여
                         .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName()) // 운영진 이상 권한 부여
@@ -78,17 +81,17 @@ public class SecurityConfig {
                         response.setContentType("text/html; charset=UTF-8");
                         response.getWriter().write("권한이 없는 사용자입니다.");
                     }
-                })
-                .authenticationEntryPoint(new AuthenticationEntryPoint() {
-                    @Override
-                    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws ServletException, IOException {
-                        // 인증문제가 발생했을 때 이 부분을 호출한다.
-                        response.setStatus(401);
-                        response.setCharacterEncoding("utf-8");
-                        response.setContentType("text/html; charset=UTF-8");
-                        response.getWriter().write("인증되지 않은 사용자입니다.");
-                    }
                 });
+//                .authenticationEntryPoint(new AuthenticationEntryPoint() {
+//                    @Override
+//                    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws ServletException, IOException {
+//                        // 인증문제가 발생했을 때 이 부분을 호출한다.
+//                        response.setStatus(401);
+//                        response.setCharacterEncoding("utf-8");
+//                        response.setContentType("text/html; charset=UTF-8");
+//                        response.getWriter().write("인증되지 않은 사용자입니다.");
+//                    }
+//                });
 
 
         return http.build();
@@ -120,8 +123,5 @@ public class SecurityConfig {
     WebSecurityCustomizer ignoringCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/resources/**");
     }
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 }

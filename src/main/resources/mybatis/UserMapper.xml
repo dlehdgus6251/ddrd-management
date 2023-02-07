@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ddrd.management.user.repository.UserMyRepository">
+    <select id="getUsers" resultType="UserDto">
+        SELECT
+            user_no,
+            del_yn,
+            final_date,
+            join_date,
+            password,
+            update_date,
+            update_no,
+            user_address,
+            user_gender,
+            user_id,
+            user_level,
+            user_name,
+            user_phone_number,
+            user_rank,
+            user_role
+        FROM ddrd_user
+    </select>
+</mapper>
