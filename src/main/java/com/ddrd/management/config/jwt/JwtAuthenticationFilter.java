@@ -1,5 +1,7 @@
 package com.ddrd.management.config.jwt;
 
+import com.ddrd.management.common.domain.LoginRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +31,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = jwtProvider.resolveToken(request);
+//
+//        ObjectMapper om = new ObjectMapper();
+//        LoginRequest loginRequest = om.readValue(request.getInputStream(), LoginRequest.class);
+//        log.info("로그인 시도 정보 :: {}", loginRequest.toString());
         if (token != null && jwtProvider.validateToken(token)) {
             // check access token
             token = token.split(" ")[1].trim();

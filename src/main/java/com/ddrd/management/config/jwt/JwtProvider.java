@@ -1,7 +1,7 @@
 package com.ddrd.management.config.jwt;
 
 import com.ddrd.management.common.domain.AuthorityEntity;
-import com.ddrd.management.common.service.JpaUserDetailsService;
+import com.ddrd.management.common.service.SecurityUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -33,7 +33,7 @@ public class JwtProvider {
     // 만료시간 : 1Hour
     private final long exp = 1000L * 60 * 60;
 
-    private final JpaUserDetailsService userDetailsService;
+    private final SecurityUserDetailsService userDetailsService;
 
     @PostConstruct
     protected void init() {

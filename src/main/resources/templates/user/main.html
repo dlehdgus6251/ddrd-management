@@ -18,19 +18,48 @@
     </tbody>
 </table>
 </body>
-<script>
+<script language="JavaScript" type="text/javascript">
     window.onload=function (){
         getUsers()
 
     }
     function getUsers(){
+
         const url = '/user/users'
         let fetchData = {
             method: 'GET'
         }
-        fetch(url, fetchData)
-            .then( (result) =>result.json())
-            .then((data)=> document.getElementById("id1").innerText(data[0].userName) )
+        //설명
+        // fetch란 == https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch 링크확인
+        // fetch(호출 url , 호출 정보(get방식, 파라미터 등등))
+        // .then(호출 후 처리)
+        // .then이 두개인 이유 : 첫번째 then은 promise객체를 리턴하기 때문에 바로 리던 값을 꺼낼 수없음(내가 방법을 모르는걸지도)
+        // 첫번째 then : 리턴값 json 형태로 변형
+        // 두번째 then : dom영역에 그릴 tbody 안에 내용 구현 후 set
+        // .then 사용법(람다식)
+        //.then((전달받은 값 값이하나면 바깥괄호 생략가능)=> 전달받은 값으로 구현 ) == 이방식은 한줄만 구현가능
+        // .then (이런식으로 =>{
+        //  전달받은값으로
+        //  여러줄 구현가능
+        // })
+
+        const userList = fetch(url, fetchData)
+            .then( response =>response.json())
+            .then((data) => {
+                let str = "";
+
+                for (let i = 0; i<data.length; i++){
+                    str += `<tr>`
+                    str +=     `<td>${data[i].userName}</td>`
+                    str +=     `<td>${data[i].userPhoneNumber}</td>`
+                    str +=     `<td>${data[i].userGender}</td>`
+                    str +=     `<td>${data[i].joinDate}</td>`
+                    str += `</tr>`
+                }
+
+                const userInfo = document.querySelector("#userInfo")
+                userInfo.innerHTML = str
+            } )
         // 지원아보아라
         // $("#userInfo")
         //document.getElementById("userInfo")

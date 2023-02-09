@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 // login 요청이 들어오면 동작
 @Service
 @RequiredArgsConstructor
-public class JpaUserDetailsService implements UserDetailsService {
+public class SecurityUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
@@ -22,4 +22,6 @@ public class JpaUserDetailsService implements UserDetailsService {
 
         return new SecurityUserDetail(userEntity);
     }
+
+
 }
