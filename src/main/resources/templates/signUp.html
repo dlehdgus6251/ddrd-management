@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+    <script>
+        //공통으로 옮기기
+        function convertFormToJson(formId){
+            const form = document.querySelector("#"+formId);
+            let obj = new Object();
+            for (let i = 0; i< form.length; i++){
+                obj[form[i].name] = form[i].value;
+            }
+            return obj;
+        }
+        function join(){
+            debugger
+
+            const url = "/signUp";
+
+            let fetchData = {
+                method: 'POST',
+                body: JSON.stringify(convertFormToJson("userForm")),
+                headers: new Headers({
+                    'Content-Type' : 'application/json; charset=UTF-8'
+                })
+            }
+            fetch(url, fetchData)
+                .then( response =>response.json())
+                .then(data => {
+                    if(data){
+                        alert("저장되었습니다.")
+
+                    }
+                })
+
+        }
+    </script>
 </head>
 <body>
-<form th:action="@{/signUp}" id="userForm" name="userForm" method="post">
+<form id="userForm" name="userForm" method="post">
   이름 : <input type="text" id="userName" name="userName">
   아이디 : <input type="text" id="userId" name="userId">
   비밀번호 : <input type="text" id="password" name="password">
@@ -16,8 +49,9 @@
         <option value="F">여</option>
         <option value="M">남</option>
     </select>
-  <button id="join" name="join">회원가입</button>
+    주소 : <input type="text" id="userAddress" name="userAddress">
 </form>
+    <button type="button" id="join" name="join" onclick="join()">회원가입</button>
 
 </body>
 </html>

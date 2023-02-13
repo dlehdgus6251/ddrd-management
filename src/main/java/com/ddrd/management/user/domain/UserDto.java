@@ -16,29 +16,20 @@ import java.util.List;
 @ToString
 public class UserDto {
     private long userNo;
-
-    private String userName;
-
-    private String userPhoneNumber;
-
-    private String userGender;
-
-    private LocalDateTime joinDate;
-
-    private String userId;
-
-    private String password;
-
-    private String userLevel;
-
-    private String userRole;
-    private List<AuthorityEntity> userAuthority = new ArrayList<>();
-    private String userRank;
-    private String userAddress;
-    private LocalDateTime finalDate;
     private String delYn;
-    private LocalDateTime updateDate;
-    private long updateNo;
-
-
+    private LocalDateTime finalDt;
+    private String joinDt;
+    private String password;
+    private LocalDateTime regDt;
+    private long regNo;
+    private LocalDateTime updDt;
+    private long updNo;
+    private String userAddress;
+    private String userGender;
+    private String userId;
+    private String userLevel;
+    private String userName;
+    private String userPhoneNumber;
+    private String userRank;
+    private List<AuthorityEntity> userAuthority = new ArrayList<>();
 }

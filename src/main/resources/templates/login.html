@@ -19,12 +19,9 @@
                 })
             }
             fetch(url, fetchData)
-                .then(function (result){
-                    console.log("result :: ", result)
-                    console.log("result :: ", result.body)
-                    console.log("result :: ", result.headers.get("Authentication"))
+                .then( response =>response.json())
+                .then(data => console.log(data) )
 
-                })
         }
     </script>
 </head>

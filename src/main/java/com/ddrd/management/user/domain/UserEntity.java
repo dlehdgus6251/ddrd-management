@@ -85,7 +85,7 @@ public class UserEntity {
     private LocalDateTime regDt;
 
     @Comment("수정인 정보")
-    private long updateNo;
+    private long updNo;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Comment("수정일")
