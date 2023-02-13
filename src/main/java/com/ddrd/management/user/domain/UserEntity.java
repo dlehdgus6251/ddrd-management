@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
@@ -81,6 +82,7 @@ public class UserEntity {
     private long regNo;
     @Nullable
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Comment("등록일")
     private LocalDateTime regDt;
 
