@@ -19,4 +19,21 @@
             upd_date
         FROM ddrd_material
     </select>
+    <select id="getMaterial" resultType="MaterialDto">
+        SELECT
+            material_no,
+            material_name,
+            material_latitude,
+            material_longitude,
+            material_new_addr,
+            material_old_addr,
+            material_noti,
+            material_secret_noti,
+            reg_no,
+            reg_date,
+            upd_no,
+            upd_date
+        FROM ddrd_material
+        WHERE material_no = #{materialNo}
+    </select>
 </mapper>

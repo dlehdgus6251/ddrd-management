@@ -29,8 +29,7 @@
         let fetchData = {
             method: 'GET'
         }
-        //설명
-        // fetch란 == https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch 링크확인
+        // fetch == https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch 링크확인
         // fetch(호출 url , 호출 정보(get방식, 파라미터 등등))
         // .then(호출 후 처리)
         // .then이 두개인 이유 : 첫번째 then은 promise객체를 리턴하기 때문에 바로 리던 값을 꺼낼 수없음(내가 방법을 모르는걸지도)
@@ -43,9 +42,9 @@
         //  여러줄 구현가능
         // })
 
-        const userList = fetch(url, fetchData)
-            .then( response =>response.json())
-            .then((data) => {
+        fetch(url, fetchData)
+            .then( (response) =>response.json())
+            .then(data => {
                 let str = "";
 
                 for (let i = 0; i<data.length; i++){

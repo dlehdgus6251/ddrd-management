@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface MaterialRepository {
     List<MaterialDto> getMaterials();
+    MaterialDto getMaterial(long materialNo);
 
-    MaterialDto getMaterial();
+    void insertMaterial(MaterialDto materialDto);
+
+    void updateMaterial(MaterialDto materialDto);
+
+    void deleteMaterial(long materialNo);
 }

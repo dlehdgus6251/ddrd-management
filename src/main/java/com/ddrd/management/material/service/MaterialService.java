@@ -15,7 +15,17 @@ public class MaterialService {
         return materialRepository.getMaterials();
     }
 
-    public MaterialDto getMaterial() {
-        return materialRepository.getMaterial();
+    public MaterialDto getMaterial(long materialNo) { return materialRepository.getMaterial(materialNo); }
+
+    public void insertMaterial(MaterialDto materialDto) {
+        materialRepository.insertMaterial(materialDto);
+    }
+
+    public void updateMaterial(MaterialDto materialDto) {
+        materialRepository.updateMaterial(materialDto);
+    }
+
+    public void deleteMaterial(long materialNo) {
+        materialRepository.deleteMaterial(materialNo);
     }
 }
