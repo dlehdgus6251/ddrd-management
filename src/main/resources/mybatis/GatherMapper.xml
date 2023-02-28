@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com/ddrd/management/gather/repository/GatherRepository">
+    <select id="getGathers" resultType="GatherDto">
+        SELECT
+            gather_no,
+            gather_name,
+            gather_count,
+            gather_song,
+            gather_singer,
+            gather_week,
+            gather_max_number,
+            material_no,
+            gather_start,
+            gather_time,
+            gather_noti,
+            reg_no,
+            reg_dt,
+            del_yn,
+            upd_dt,
+            upd_no
+        FROM
+            ddrd_gather
+    </select>
+
+    <select id="getGather" resultType="GatherDto">
+        SELECT
+            gather_no,
+            gather_name,
+            gather_count,
+            gather_song,
+            gather_singer,
+            gather_week,
+            gather_max_number,
+            material_no,
+            gather_start,
+            gather_time,
+            gather_noti,
+            reg_no,
+            reg_dt,
+            del_yn,
+            upd_dt,
+            upd_no
+        FROM
+            ddrd_gather
+        WHERE
+            gather_no = #{gatherNo}
+    </select>
+</mapper>

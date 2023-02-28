@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 //                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), JwtLoginFilter.class)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/", "/main", "/login", "/login/**", "/signUp","/user","/user/**","/api/v1/**","/material/**").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
+                        .requestMatchers( "/", "/main", "/login", "/login/**", "/signUp","/user","/user/**","/api/v1/**","/material/**","/gather/**","/gather").permitAll() // 설정된 url은 인증되지 않더라도 누구든 접근 가능
                         //권한 보유 depth USER(사용자) < MANAGER(운영진) < MASTER(모임장) < ADMIN(어플관리자) < DEVELOPER(개발자)
                         .requestMatchers("/user","/user/**").hasAnyRole(UserRoleType.USER.roleName()) // 유저 이상 권한 부여
                         .requestMatchers("/manager", "/manager/**").hasAnyRole(UserRoleType.MANAGER.roleName()) // 운영진 이상 권한 부여
