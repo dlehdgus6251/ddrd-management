@@ -35,53 +35,53 @@ public class MaterialController {
 //        return "material/main";
 //    }
 
-    /**
-     * 소재 전체 조회(api 용)
-     * @return materialDtoList
-     */
-    @GetMapping("/materials")
-    public ResponseEntity<List<MaterialDto>> getMaterials(){
-        return new ResponseEntity<>(materialService.getMaterials(), HttpStatus.OK);
-    }
-
-    /**
-     * 소재 상세 조회
-     * @param materialNo
-     * @return
-     */
-    @GetMapping("/material/{id}")
-    public ResponseEntity<MaterialDto> getMaterial(@PathVariable("id") long materialNo) {
-        return new ResponseEntity<>( materialService.getMaterial(materialNo), HttpStatus.OK);
-    }
-
-    /**
-     * 소재 등록
-     * @param materialDto
-     * @return
-     */
-    @PostMapping("/material")
-    public ResponseEntity<HttpStatus> insertMaterial(@RequestBody MaterialDto materialDto) {
-        materialService.insertMaterial(materialDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /**
-     * 소재 수정
-     * @param materialDto
-     * @param
-     * @return
-     */
-    @PutMapping("/material")
-    public ResponseEntity<HttpStatus> updateMaterial (@RequestBody MaterialDto materialDto){
-        materialService.updateMaterial(materialDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/material/{id}")
-    public ResponseEntity<HttpStatus> deleteMaterial(@PathVariable("id") long materialno){
-        materialService.deleteMaterial(materialno);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    /**
+//     * 소재 전체 조회(api 용)
+//     * @return materialDtoList
+//     */
+//    @GetMapping("/materials")
+//    public ResponseEntity<List<MaterialDto>> getMaterials(){
+//        return new ResponseEntity<>(materialService.getMaterials(), HttpStatus.OK);
+//    }
+//
+//    /**
+//     * 소재 상세 조회
+//     * @param materialNo
+//     * @return
+//     */
+//    @GetMapping("/material/{id}")
+//    public ResponseEntity<MaterialDto> getMaterial(@PathVariable("id") long materialNo) {
+//        return new ResponseEntity<>( materialService.getMaterial(materialNo), HttpStatus.OK);
+//    }
+//
+//    /**
+//     * 소재 등록
+//     * @param materialDto
+//     * @return
+//     */
+//    @PostMapping("/material")
+//    public ResponseEntity<HttpStatus> insertMaterial(@RequestBody MaterialDto materialDto) {
+//        materialService.insertMaterial(materialDto);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    /**
+//     * 소재 수정
+//     * @param materialDto
+//     * @param
+//     * @return
+//     */
+//    @PutMapping("/material")
+//    public ResponseEntity<HttpStatus> updateMaterial (@RequestBody MaterialDto materialDto){
+//        materialService.updateMaterial(materialDto);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/material/{id}")
+//    public ResponseEntity<HttpStatus> deleteMaterial(@PathVariable("id") long materialno){
+//        materialService.deleteMaterial(materialno);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 
 

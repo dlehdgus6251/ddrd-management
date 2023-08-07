@@ -1,20 +1,24 @@
 package com.ddrd.management.material.repository;
 
 import com.ddrd.management.material.domain.MaterialDto;
-import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Mapper;
+import com.ddrd.management.material.domain.MaterialEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Mapper
+import java.util.Optional;
+
 @Repository
-public interface MaterialRepository {
-    List<MaterialDto> getMaterials();
-    MaterialDto getMaterial(long materialNo);
-
-    void insertMaterial(MaterialDto materialDto);
-
-    void updateMaterial(MaterialDto materialDto);
-
-    void deleteMaterial(long materialNo);
+@Transactional
+public interface MaterialRepository extends JpaRepository<MaterialEntity, Long> {
+    List<MaterialEntity> findAll();
+//    List<MaterialDto> getMaterials();
+//    MaterialDto getMaterial(long materialNo);
+//
+//    void insertMaterial(MaterialDto materialDto);
+//
+//    void updateMaterial(MaterialDto materialDto);
+//
+//    void deleteMaterial(long materialNo);
 }

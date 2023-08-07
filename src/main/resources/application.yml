@@ -9,7 +9,11 @@ server:
 spring:
     profiles:
       active: local
-
+    devtools:
+      livereload:
+        enabled: true
+    thymeleaf:
+      cache: false
     jpa:
       show-sql: true
       properties:

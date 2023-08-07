@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +29,10 @@ public class LoginService {
 
     public LoginResponse login(LoginRequest request) throws Exception {
         UserEntity userEntity = userEntityRepository.findByUserId(request.getUserId()).orElseThrow(() ->
-                new BadCredentialsException("잘못된 계정정보입니다."));
+                new UsernameNotFoundException("존재하지 않는 계정입니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), userEntity.getPassword())) {
-            throw new BadCredentialsException("잘못된 계정정보입니다.");
+            throw new BadCredentialsException("비밀번호가 틀렸습니다.");
         }
         log.info("login 시도 :: {}", userEntity.toString());
 

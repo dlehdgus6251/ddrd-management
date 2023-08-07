@@ -48,4 +48,35 @@
         WHERE
             gather_no = #{gatherNo}
     </select>
+    <insert id="insertGather">
+        INSERT INTO ddrd_gather(
+            gather_name,
+            gather_count,
+            gather_song,
+            gather_singer,
+            gather_week,
+            gather_max_number,
+            material_no,
+            gather_start,
+            gather_time,
+            gather_noti,
+            reg_no,
+            reg_dt,
+            del_yn
+        ) values (
+            #{gatherName},
+            #{gatherCount},
+            #{gatherSong},
+            #{gatherSinger},
+            #{gatherWeek},
+            #{gatherMaxNumber},
+            #{materialNo},
+            #{gatherStart},
+            #{gatherTime},
+            #{gatherNoti},
+            1,
+            now(),
+            'N'
+        )
+    </insert>
 </mapper>

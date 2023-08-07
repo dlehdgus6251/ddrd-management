@@ -28,8 +28,8 @@ public class CommonController extends BaseController{
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
         log.info("로그인 시도 정보 :: {}", request.toString());
-
-        return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
+        LoginResponse response = loginService.login(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/signUp")
     public String signUp(){

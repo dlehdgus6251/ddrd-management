@@ -3,11 +3,10 @@ package com.ddrd.management.user.domain;
 import com.ddrd.management.common.domain.AuthorityEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class UserEntity {
     @Comment("이름")
     private String userName;
     @Nullable
-    @Column(length = 15)
+    @Column(length = 15, unique = true)
     @Comment("전화번호")
     private String userPhoneNumber;
     @Nullable
@@ -81,17 +80,16 @@ public class UserEntity {
     @Comment("등록인 정보")
     private long regNo;
     @Nullable
-    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    @Comment("등록일")
-    private LocalDateTime regDt;
+    @Comment("등록일시")
+    private LocalDateTime regDt = LocalDateTime.now();
 
     @Comment("수정인 정보")
     private long updNo;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Comment("수정일")
-    private LocalDateTime updDt;
+    @UpdateTimestamp
+    @Comment("수정일시")
+    private LocalDateTime updDt = LocalDateTime.now();
 
     public void setUserAuthority(List<AuthorityEntity> authority) {
         this.userAuthority = authority;

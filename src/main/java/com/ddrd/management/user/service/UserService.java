@@ -12,7 +12,6 @@ import java.util.List;
 public class UserService {
     private final UserMyRepository userRepository;
 
-
     public List<UserDto> getUsers(){
         return userRepository.getUsers();
     }
