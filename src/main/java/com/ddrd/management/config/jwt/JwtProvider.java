@@ -45,7 +45,7 @@ public class JwtProvider {
         Claims claims = Jwts.claims().setSubject(userId);
         claims.put("roles", roles);
         Date now = new Date();
-        return Jwts.builder()
+        return "BEARER " + Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + exp))
@@ -73,6 +73,7 @@ public class JwtProvider {
     // 토큰 검증
     public boolean validateToken(String token) {
         try {
+            String aaa = token.substring(0, "BEARER ".length());
             // Bearer 검증
             if (!token.substring(0, "BEARER ".length()).equalsIgnoreCase("BEARER ")) {
                 return false;

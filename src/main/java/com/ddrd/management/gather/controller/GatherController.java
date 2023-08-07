@@ -3,6 +3,7 @@ package com.ddrd.management.gather.controller;
 import com.ddrd.management.gather.domain.GatherDto;
 import com.ddrd.management.gather.service.GatherService;
 import jakarta.websocket.server.PathParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-
+@RequiredArgsConstructor
 @RequestMapping("/gather")
 public class GatherController {
 
-    private GatherService gatherService;
+    private final GatherService gatherService;
     @GetMapping(value = "/main")
     public String getGather(){
         return "/gather/main";
