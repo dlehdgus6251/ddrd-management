@@ -29,7 +29,8 @@ public class MaterialEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     @Comment("소재 번호")
-    private long materialNo;
+    @Column(name = "material_no")
+    private long id;
     @Nullable
     @Column(length = 50)
     @Comment("소재명")
@@ -46,10 +47,10 @@ public class MaterialEntity {
     @Column(length = 50)
     @Comment("소재 구주소")
     private String materialNewAddr;
-    @Comment("소재번호")
-    @OneToMany(mappedBy = "matherialEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Builder.Default
-    private List<GatherEntity> gatherEntity = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "materialEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @Builder.Default
+//    private List<GatherEntity> gatherEntity = new ArrayList<>();
     @Nullable
     @Column(length = 50)
     @Comment("소재 도로명주소")
@@ -57,10 +58,12 @@ public class MaterialEntity {
     @Nullable
     @Column(length = 500)
     @Comment("소재 메모")
+    @Lob
     private String materialNoti;
     @Nullable
     @Column(length = 500)
     @Comment("소재 관리자 메모")
+    @Lob
     private String materialSecretNoti;
     @Nullable
     @Comment("등록인 정보")
@@ -75,8 +78,8 @@ public class MaterialEntity {
     @UpdateTimestamp
     @Comment("수정일시")
     private LocalDateTime updDt = LocalDateTime.now();
-    public void setGatherEntity(List<GatherEntity> gatherEntity) {
-        this.gatherEntity = gatherEntity;
-        gatherEntity.forEach(o -> o.setMaterialEntity(this));
-    }
+//    public void setGatherEntity(List<GatherEntity> gatherEntity) {
+//        this.gatherEntity = gatherEntity;
+//        gatherEntity.forEach(o -> o.setMaterialEntity(this));
+//    }
 }

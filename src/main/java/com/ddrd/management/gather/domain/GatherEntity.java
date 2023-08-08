@@ -29,7 +29,8 @@ public class GatherEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     @Comment("모임 번호")
-    private Long gatherNo;
+    @Column(name = "gather_no")
+    private Long id;
     @Nullable
     @Column(length = 50)
     @Comment("모임명")
@@ -61,6 +62,7 @@ public class GatherEntity {
     @Nullable
     @Column(length = 500)
     @Comment("메모")
+    @Lob
     private String gatherNoti;
     @Nullable
     @Comment("등록인 정보")
@@ -82,8 +84,7 @@ public class GatherEntity {
     private String delYn;
 
     @JoinColumn(name = "material_no")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToOne//(fetch = FetchType.LAZY)
     private MaterialEntity materialEntity;
 
     public void setMaterialEntity(MaterialEntity materialEntity) {

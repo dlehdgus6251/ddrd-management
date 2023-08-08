@@ -23,8 +23,9 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
+    @Column(name = "user_no")
     @Comment("USER 번호")
-    private long userNo;
+    private long id;
     @Nullable
     @Column(length = 10)
     @Comment("이름")

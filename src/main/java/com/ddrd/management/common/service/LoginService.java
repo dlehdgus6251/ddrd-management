@@ -37,7 +37,7 @@ public class LoginService {
         log.info("login 시도 :: {}", userEntity.toString());
 
         return LoginResponse.builder()
-                .userNo(userEntity.getUserNo())
+                .userNo(userEntity.getId())
                 .userId(userEntity.getUserId())
                 .userName(userEntity.getUserName())
                 .userAuthority(userEntity.getUserAuthority())

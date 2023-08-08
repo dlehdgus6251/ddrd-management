@@ -22,7 +22,7 @@ public class LoginResponse {
     private String token;
 
     public LoginResponse(UserEntity userEntity) {
-        this.userNo = userEntity.getUserNo();
+        this.userNo = userEntity.getId();
         this.userName = userEntity.getUserName();
         this.userId = userEntity.getUserId();
         this.password = userEntity.getPassword();
